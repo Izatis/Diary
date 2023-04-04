@@ -1,0 +1,24 @@
+.modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: none;
+  background: rgba(0, 16, 61, 0.48);
+  transition: 0.5s;
+  padding: 0 20px;
+
+  .input_btn{
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    margin: 20px auto;
+    box-sizing: border-box;
+  }
+}
+
+.modalActive {
+  display: flex;
+}
