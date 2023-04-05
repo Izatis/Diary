@@ -9,50 +9,35 @@ import emoji from "../../data/emoji.json";
 import { useNavigate } from "react-router-dom";
 import MySelect from "../../components/MUI/MySelect/MySelect";
 import { AddContext } from "../AddContext/AddContext";
-import { createClient } from "pexels";
 import picked from "../../assets/picked.png";
 import ModalWallpaper from "../../components/Modals/ModalWallpaper/ModalWallpaper";
 
 const CreateCard = () => {
   /* Запрос на Api pixels */
 
-  // Массив с картинками
-  const [photos, setPhotos] = useState([]);
-  
-  // Состояния модалки (из контекста)
-  const {searchImg, setSearchImg} = useContext(AddContext);
+  // Значение инпута (общий)
+  const { searchImg, setSearchImg } = useContext(AddContext);
 
-  // Ключ на pixels
-  const client = createClient(
-    "IS7Tr1T2bqprvokbeCmn9Poo4q8jWxp0NzbBeZrpfomJTmsk1o9NmwaW"
-  );
+  // Массив с картинками (общий)
+  const { photos } = useContext(AddContext);
 
-  // Зарос на Api pixels
-  const getPhotos = (query) => {
-    client.photos.search({ query, per_page: 5 }).then((photos) => {
-      setPhotos(photos.photos);
-    });
-  };
+  // Условие на кнопку поиска (общий)
+  const { getPhotosBtn } = useContext(AddContext);
 
-  // Условие на кнопку
-  const getPhotosBtn = () => {
-    if (searchImg.trim() === "") {
-      alert("Поле ввода пустое!");
-    } else {
-      getPhotos(searchImg);
-      setSearchImg("");
-    }
-  };
+  // ==========================================================
 
-  // В начале загрузки
-  useEffect(() => {
-    getPhotos("Nature");
-  }, []);
+  // Шаг-1. Состояние для появление галочки
+  const { setTodoImg } = useContext(AddContext);
+
+  // Шаг-2. Добавление стиля при клике на картинку (появление галочки)
+  const { imgPicked } = useContext(AddContext);
 
   // ----------------------------------------------------------------
 
-  // Состояние модалки
-  const { modalActive, setModalActive } = useContext(AddContext);
+  // Для предотвращения скроллинга заднего содержимого при открытии модального окна (общий)
+  const { openModal } = useContext(AddContext);
+
+  // ==========================================================
 
   /* Создание новой карточки */
   const { createCard } = useContext(AddContext);
@@ -60,15 +45,13 @@ const CreateCard = () => {
   // Маршутизация после создания карточки
   const navigate = useNavigate();
 
-  const [todoImg, setTodoImg] = useState(-1);
-
   // Состояние для инпутов
   const [card, setCard] = useState({
     title: "",
     description: "",
     mood: "",
     date: "",
-    img: mountain,
+    img: "",
   });
 
   // Добавленин карточки к главной ветке
@@ -80,6 +63,7 @@ const CreateCard = () => {
       card.date.trim() === "" ||
       card.img.trim() === ""
     ) {
+      alert("Заполните все поля и выберете фотографию!");
     } else {
       navigate("/");
       const newCard = {
@@ -92,36 +76,36 @@ const CreateCard = () => {
         description: "",
         mood: "",
         date: "",
-        img: pen,
+        img: "",
       });
     }
   };
 
-  const imgPicked = (index) => {
-    if (todoImg === index) {
-      return s.imgPicked;
-    } else {
-      return s.imgNotPicked;
-    }
-  };
   return (
     <div className={s.main}>
-      <img className={s.clone_wallpaper} src={mountain} alt={mountain} onClick={() => setModalActive(!modalActive)}/>
-      <ModalWallpaper/>
+      <img
+        className={s.clone_wallpaper}
+        src={mountain}
+        alt={mountain}
+        onClick={openModal}
+      />
+      <ModalWallpaper />
+
       {/* Управляемый компонент */}
       <form className={s.createForm}>
         <div className={s.input_date_select}>
           <MyInput
             style={{ maxWidth: 670 }}
             value={card.title}
-            onChange={(e) => setCard({ ...card, title: e.target.value })}
             placeholder="Название"
+            onChange={(e) => setCard({ ...card, title: e.target.value })}
           />
           <div className={s.date_select}>
             <MySelect
               className={s.createMood}
               style={{ maxWidth: 100 }}
               options={emoji}
+              onChange={(e) => setCard({ ...card, mood: e.target.value })}
             />
 
             <MyInput
@@ -168,19 +152,20 @@ const CreateCard = () => {
               <div onClick={() => setTodoImg(index)} className={s.wallpaper}>
                 <div className={imgPicked(index)}>
                   <span>
-                    <img
-                      onClick={(e) =>
-                        setCard({
-                          ...card,
-                          img: e.target.src,
-                        })
-                      }
-                      src={picked}
-                      alt="check"
-                    />
+                    <img src={picked} alt="check" />
                   </span>
                 </div>
-                <img key={photo.key} src={photo.src.original} alt={photo.alt} />
+                <img
+                  key={photo.key}
+                  src={photo.src.original}
+                  alt={photo.alt}
+                  onClick={(e) =>
+                    setCard({
+                      ...card,
+                      img: e.target.src,
+                    })
+                  }
+                />
               </div>
             );
           })}

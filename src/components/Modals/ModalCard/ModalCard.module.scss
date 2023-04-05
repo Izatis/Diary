@@ -2,13 +2,15 @@
   width: 100vw;
   height: 100vh;
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
-  z-index: 1;
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.5s;
+  display: flex;
   align-items: center;
   background: rgba(0, 16, 61, 0.48);
-  transition: 0.5s;
   box-sizing: border-box;
   padding: 80px;
 
@@ -19,8 +21,14 @@
     background: #ffffff;
     border-radius: 12px;
     box-sizing: border-box;
+    transform: scale(0.5);
+    transition: 0.4s all;
     margin: 0 auto;
     padding: 44px 40px 60px 40px;
+
+    &.modal_active {
+      transform: scale(1);
+    }
 
     .modal_header {
       display: flex;
@@ -59,34 +67,32 @@
           border-radius: 12px;
         }
       }
-      .text{
-      .modal_header_clone {
-        display: none;
-      }
     }
+
+    .clone {
+      display: none;
     }
   }
 }
 
-.modalActive {
-  display: flex;
+.modal_active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 @media (max-width: 1024px) {
   .modal {
     .modal_content {
       .modal_header {
-        .mood_title {
-          h1 {
-            font-size: 36px;
-            line-height: 42px;
-          }
-        }
+        display: none;
       }
       .img_description {
         display: block;
         .modal_img {
-          max-width: 381px;
+          display: none;
+        }
+        .clone {
+          display: block;
         }
       }
     }
@@ -101,43 +107,9 @@
       width: 100vw;
       height: 100vh;
       padding: 0;
-      .modal_header {
-        display: none;
-      }
       .img_description {
-        position: relative;
-        margin: 0;
-        .modal_img {
-          max-width: 650px;
-        }
-        .text{
-          padding: 20px;
-        .modal_header_clone {
-          display: block;
-          .close {
-            position: absolute;
-            bottom: 52px;
-            right: 15px;
-            cursor: pointer;
-          }
-          .mood_title {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            h1 {
-              font-family: "Roboto";
-              font-style: normal;
-              font-weight: 700;
-              font-size: 18px;
-              line-height: 21px;
-              margin: 0;
-            }
-          }
-          .date {
-            margin: 9px 0 17px 5px;
-          }
-        }
-      }
+
+       
       }
     }
   }

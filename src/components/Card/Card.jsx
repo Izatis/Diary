@@ -4,10 +4,12 @@ import ModalCard from "../Modals/ModalCard/ModalCard";
 import { AddContext } from "../../pages/AddContext/AddContext";
 
 const Card = ({ item, ...props }) => {
-  const {modalActive, setModalActive} = useContext(AddContext)    
+  // Для предотвращения скроллинга заднего содержимого при открытии модального окна (общий)
+  const { openModal } = useContext(AddContext);
+
   return (
     <>
-      <div className={s.card_main} onClick={() => setModalActive(!modalActive)}>
+      <div className={s.card_main} onClick={openModal}>
         <img src={item.img} alt="img" />
         <button {...props} className={s.circle}>
           <span>{item.mood}</span>
@@ -21,8 +23,6 @@ const Card = ({ item, ...props }) => {
         </div>
       </div>
       <ModalCard
-        modalActive={modalActive}
-        setModalActive={setModalActive}
         item={item}
       />
     </>
