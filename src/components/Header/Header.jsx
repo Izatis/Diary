@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import s from "./Header.module.scss";
 import icon from "../../assets/icon.png";
 import MyInput from "../MUI/MyInput/MyInput";
@@ -10,14 +10,34 @@ import MyButton from "../MUI/MyButton/MyButton";
 import emoji from "../../data/emoji.json";
 import { AddContext } from "../../pages/AddContext/AddContext";
 
-const Header = () => {
-  const { cardData, setCardData } = useContext(AddContext);
+const Header = ({ handleFilterOutCards }) => {
+  // Шаг-1. Состояние - для появление галочки, (общий)
+  const { setCardImgId } = useContext(AddContext);
 
   const location = useLocation();
   const navigate = useNavigate();
-  const sortedCards = (sort) => {
-    setCardData(cardData.filter((item) => item.mood === sort));
+
+  // Функция - для сброса по умолчанию (Шаг-1. Состояние - для появление галочки)
+  const handleClick = () => {
+    navigate("/createCard");
+    setCardImgId(-1);
   };
+
+  // ----------------------------------------------------------------
+
+  // Состояние - для select
+  const [select, setSelect] = useState("default");
+
+  // Функция - для сортировки карточек
+  const sortedCards = (e) => {
+    setSelect(e.target.value);
+    handleFilterOutCards(e.target.value);
+  };
+
+  // ----------------------------------------------------------------
+
+  // Состояние - для инпута поиска
+  const { searchValue, setSearchValue } = useContext(AddContext);
 
   return (
     <header>
@@ -29,11 +49,17 @@ const Header = () => {
         <div className={s.input_btn}>
           {location.pathname === "/" ? (
             <div className={s.inputs}>
-              <MyInput style={{ maxWidth: 480 }} placeholder="Поиск" />
+              <MyInput
+                style={{ maxWidth: 480 }}
+                placeholder="Поиск"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
               <MySelect
                 style={{ maxWidth: 100 }}
-                onChange={(event) => sortedCards(event.target.value)}
                 options={emoji}
+                value={select}
+                onChange={sortedCards}
               />
             </div>
           ) : null}
@@ -49,7 +75,7 @@ const Header = () => {
               style={{ maxWidth: 166 }}
               img={pen}
               text={"Запись"}
-              onClick={() => navigate("/createCard")}
+              onClick={() => handleClick()}
             />
           </div>
         </div>

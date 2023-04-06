@@ -4,7 +4,7 @@ import MyInput from "../../components/MUI/MyInput/MyInput";
 import search from "../../assets/search.png";
 import MyButton from "../../components/MUI/MyButton/MyButton";
 import add from "../../assets/add.png";
-import mountain from "../../assets/Mountain.png";
+import mountain from "../../assets/Rectangle 3.png";
 import emoji from "../../data/emoji.json";
 import { useNavigate } from "react-router-dom";
 import MySelect from "../../components/MUI/MySelect/MySelect";
@@ -15,37 +15,54 @@ import ModalWallpaper from "../../components/Modals/ModalWallpaper/ModalWallpape
 const CreateCard = () => {
   /* Запрос на Api pixels */
 
-  // Значение инпута (общий)
+  // Значение инпута, (общий)
   const { searchImg, setSearchImg } = useContext(AddContext);
 
-  // Массив с картинками (общий)
+  // Массив с картинками, (общий)
   const { photos } = useContext(AddContext);
 
-  // Условие на кнопку поиска (общий)
+  // Условие на кнопку поиска, (общий)
   const { getPhotosBtn } = useContext(AddContext);
-
-  // ==========================================================
-
-  // Шаг-1. Состояние для появление галочки
-  const { setTodoImg } = useContext(AddContext);
-
-  // Шаг-2. Добавление стиля при клике на картинку (появление галочки)
-  const { imgPicked } = useContext(AddContext);
 
   // ----------------------------------------------------------------
 
-  // Для предотвращения скроллинга заднего содержимого при открытии модального окна (общий)
-  const { openModal } = useContext(AddContext);
+  // Шаг-1. Состояние - для появление галочки
+  const [cardImgId, setCardImgId] = useState(-1);
 
-  // ==========================================================
+  // Шаг-2. Добавление стиля при клике на картинку (появление галочки)
+  const imgPicked = (index) => {
+    if (cardImgId === index) {
+      return s.imgPicked;
+    } else {
+      return s.imgNotPicked;
+    }
+  };
 
-  /* Создание новой карточки */
+  // ----------------------------------------------------------------
+
+  // Состояние - модалки, (общий)
+  const [showModal, setModalActive] = useState(false);
+
+  // Для предотвращения скроллинга заднего содержимого при открытии модального окна
+  function showModalFunc() {
+    setModalActive(true);
+    document.body.style.overflow = "hidden";
+  }
+
+  function doNotShowModalFunc() {
+    setModalActive(false);
+    document.body.style.overflow = "auto";
+  }
+
+  // ----------------------------------------------------------------
+
+  // Функция - для создание карточки, (общий)
   const { createCard } = useContext(AddContext);
 
   // Маршутизация после создания карточки
   const navigate = useNavigate();
 
-  // Состояние для инпутов
+  // Состояние - для инпутов
   const [card, setCard] = useState({
     title: "",
     description: "",
@@ -53,6 +70,15 @@ const CreateCard = () => {
     date: "",
     img: "",
   });
+
+  // ====================================================================
+
+  // Чтобы достать src картинку из модалки, с помощю функции
+  const changeImg = (newSrc) => {
+    setCard({ ...card, img: newSrc });
+  };
+
+  // ====================================================================
 
   // Добавленин карточки к главной ветке
   const addNewPost = () => {
@@ -86,10 +112,16 @@ const CreateCard = () => {
       <img
         className={s.clone_wallpaper}
         src={mountain}
-        alt={mountain}
-        onClick={openModal}
+        alt={'mountain'}
+        onClick={showModalFunc}
       />
-      <ModalWallpaper />
+      <ModalWallpaper
+        changeImg={changeImg}
+        card={card}
+        setCard={setCard}
+        doNotShowModalFunc={doNotShowModalFunc}
+        showModal={showModal}
+      />
 
       {/* Управляемый компонент */}
       <form className={s.createForm}>
@@ -149,14 +181,17 @@ const CreateCard = () => {
         <div className={s.wallpapers}>
           {photos.map((photo, index) => {
             return (
-              <div onClick={() => setTodoImg(index)} className={s.wallpaper}>
+              <div
+                key={photo.id}
+                onClick={() => setCardImgId(index)}
+                className={s.wallpaper}
+              >
                 <div className={imgPicked(index)}>
                   <span>
                     <img src={picked} alt="check" />
                   </span>
                 </div>
                 <img
-                  key={photo.key}
                   src={photo.src.original}
                   alt={photo.alt}
                   onClick={(e) =>

@@ -3,15 +3,23 @@ import s from "./Card.module.scss";
 import ModalCard from "../Modals/ModalCard/ModalCard";
 import { AddContext } from "../../pages/AddContext/AddContext";
 
-const Card = ({ item, ...props }) => {
-  // Для предотвращения скроллинга заднего содержимого при открытии модального окна (общий)
-  const { openModal } = useContext(AddContext);
+const Card = ({ item }) => {
+  // Здесь мы создаем отдельное состояние для каждой карточки, а глобальное состояние не подходить
+  // Состояние - для каждой карточки
+  const [showModal, setShowModal] = useState(false);
 
+  // ----------------------------------------------------------------
+
+  // Функция - для удаление карточек, (общий)
+  const { removeCard } = useContext(AddContext);
   return (
     <>
-      <div className={s.card_main} onClick={openModal}>
+      <div className={s.card_main} onClick={() => setShowModal(true)}>
         <img src={item.img} alt="card_image" />
-        <button {...props} className={s.circle}>
+        <button
+          className={s.circle}
+          onClick={(event) => removeCard(item, event)}
+        >
           <span>{item.mood}</span>
         </button>
         <div className={s.text_block}>
@@ -24,6 +32,8 @@ const Card = ({ item, ...props }) => {
       </div>
       <ModalCard
         item={item}
+        showModal={showModal}
+        setShowModal={setShowModal}
       />
     </>
   );

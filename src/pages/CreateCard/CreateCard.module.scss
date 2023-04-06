@@ -73,9 +73,28 @@
       grid-template-rows: 219px 219px 219px 219px;
       margin-top: 29px;
       .wallpaper {
+        position: relative;
         border-radius: 12px;
         cursor: pointer;
-        position: relative;
+        .imgPicked {
+          width: 60px;
+          height: 60px;
+          border-radius: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgba(255, 255, 255, 0.7);
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          transition: 0, 5s;
+        }
+
+        .imgNotPicked {
+          display: none;
+        }
+
         img {
           border-radius: 12px;
           cursor: pointer;

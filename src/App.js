@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import s from "./App.module.scss";
+import React, { useEffect, useMemo, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
 import Header from "./components/Header/Header";
 import CreateCard from "./pages/CreateCard/CreateCard";
 import List from "./pages/List/List";
@@ -9,6 +9,22 @@ import { createClient } from "pexels";
 import data from "./data/data";
 
 function App() {
+  // Глобальные данные карточек
+  const [cardData, setCardData] = useState(data);
+
+  // Функция - для создание карточки
+  const createCard = (newPost) => {
+    setCardData([...cardData, newPost]);
+  };
+
+  // Функция - для удоление карточек
+  const removeCard = (item, event) => {
+    event.stopPropagation();
+    setCardData(cardData.filter((current) => current.id !== item.id));
+  };
+
+  // ----------------------------------------------------------------
+
   /* Запрос на Api pixels */
 
   // Массив с картинками
@@ -44,75 +60,61 @@ function App() {
     getPhotos("Nature");
   }, []);
 
-  // ==========================================================
+  // ----------------------------------------------------------------
 
-  // Шаг-1. Состояние для появление галочки
-  const [todoImg, setTodoImg] = useState(-1);
+  // Состояние - отфильтированных карточек, клон (Глобальные данные карточек)
+  const [filteredCards, setFilteredCards] = useState(cardData);
 
-  // Шаг-2. Добавление стиля при клике на картинку (появление галочки)
-  const imgPicked = (index) => {
-    if (todoImg === index) {
-      return s.imgPicked;
+  // Функция - для отфильтировки карточек
+  const handleFilterOutCards = (value) => {
+    if (value !== "default") {
+      setFilteredCards(
+        cardData.filter((card) => {
+          return card.mood === value;
+        })
+      );
     } else {
-      return s.imgNotPicked;
+      return setFilteredCards(cardData);
     }
   };
 
-  // -----------------------------------------------------------
+  // Жизненный цикл - когда добавляется новая карточка, изменяет (Состояние - отфильтированных карточек, клон (Глобальные данные карточек)
+  useEffect(() => {
+    setFilteredCards(cardData);
+  }, [cardData]);
 
-  // Состояние модалки (общий)
-  const [modalActive, setModalActive] = useState(false);
+  // ====================================================================
 
-  // Для предотвращения скроллинга заднего содержимого при открытии модального окна
-  function openModal() {
-    setModalActive(true);
-    document.body.style.overflow = "hidden";
-  }
+  // Состояние - для инпута поиска
+  const [searchValue, setSearchValue] = useState("");
 
-  function closeModal() {
-    setModalActive(false);
-    document.body.style.overflow = "auto";
-  }
-
-  // ==========================================================
-
-  const [cardData, setCardData] = useState(data);
-
-  const createCard = (newPost) => {
-    setCardData([...cardData, newPost]);
-  };
-
-  const removeCard = (card) => {
-    setCardData(cardData.filter((p) => p.id !== card.id));
-  };
+  const searchCard = useMemo(() => {
+    return filteredCards.filter((card) =>
+      card.title.toLowerCase().includes(searchValue)
+    );
+  }, [searchValue, filteredCards]);
 
   return (
-    <BrowserRouter>
-      <AddContext.Provider
-        value={{
-          setTodoImg,
-          photos,
-          getPhotosBtn,
-          searchImg,
-          setSearchImg,
-          openModal,
-          closeModal,
-          modalActive,
-          cardData,
-          setCardData,
-          createCard,
-          removeCard,
-          imgPicked,
-        }}
-      >
-        <Header />
-        <Routes>
-          <Route path="/createCard" element={<CreateCard />} />
+    <AddContext.Provider
+      value={{
+        setCardData,
+        createCard,
+        removeCard,
+        photos,
+        getPhotosBtn,
+        searchImg,
+        setSearchImg,
+        searchValue,
+        setSearchValue,
+      }}
+    >
+      <Header handleFilterOutCards={handleFilterOutCards} />
+      <Routes>
+        <Route path="/createCard" element={<CreateCard />} />
 
-          <Route path="/" element={<List />} />
-        </Routes>
-      </AddContext.Provider>
-    </BrowserRouter>
+        <Route path="/" element={<List readyСards={searchCard} />} />
+      </Routes>
+    </AddContext.Provider>
   );
 }
 

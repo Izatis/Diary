@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import s from "./ModalWallpaper.module.scss";
 import cn from "classnames";
 import { AddContext } from "../../../pages/AddContext/AddContext";
@@ -7,39 +7,40 @@ import picked from "../../../assets/picked.png";
 import MyInput from "../../MUI/MyInput/MyInput";
 import MyButton from "../../MUI/MyButton/MyButton";
 
-const ModalWallpaper = () => {
+const ModalWallpaper = ({ changeImg, doNotShowModalFunc, showModal }) => {
   /* Запрос на Api pixels */
 
-  // Значение инпута (общий)
+  // Значение инпута, (общий)
   const { searchImg, setSearchImg } = useContext(AddContext);
 
-  // Массив с картинками (общий)
+  // Массив с картинками, (общий)
   const { photos } = useContext(AddContext);
 
-  // Условие на кнопку поиска (общий)
+  // Условие на кнопку поиска, (общий)
   const { getPhotosBtn } = useContext(AddContext);
 
   // ==========================================================
 
-  // Шаг-1. Состояние для появление галочки
-  const { setTodoImg } = useContext(AddContext);
+  // Шаг-1. Состояние - для появление галочки
+  const [cardImgIdSecond, setCardImgIdSecond] = useState(-1);
 
   // Шаг-2. Добавление стиля при клике на картинку (появление галочки)
-  const { imgPicked } = useContext(AddContext);
-
-  // ----------------------------------------------------------------
-
-  // Для предотвращения скроллинга заднего содержимого при открытии модального окна (общий). Состояния модалки (общий)
-  const { closeModal, modalActive } = useContext(AddContext);
+  const imgPickedSecond = (index) => {
+    if (cardImgIdSecond === index) {
+      return s.imgPicked;
+    } else {
+      return s.imgNotPicked;
+    }
+  };
 
   return (
     <div
-      className={modalActive ? cn(s.modal, s.modal_active) : s.modal}
-      onClick={closeModal}
+      className={showModal ? cn(s.modal, s.modal_active) : s.modal}
+      onClick={doNotShowModalFunc}
     >
       <div
         className={
-          modalActive ? cn(s.modal_content, s.modal_active) : s.modal_content
+          showModal ? cn(s.modal_content, s.modal_active) : s.modal_content
         }
         onClick={(e) => e.stopPropagation()}
       >
@@ -60,22 +61,21 @@ const ModalWallpaper = () => {
 
         {photos.map((photo, index) => {
           return (
-            <div onClick={() => setTodoImg(index)} className={s.wallpaper}>
-              {/* <div className={imgPicked(index)}>
+            <div
+              key={photo.id}
+              onClick={() => setCardImgIdSecond(index)}
+              className={s.wallpaper}
+            >
+              <div className={imgPickedSecond(index)}>
                 <span>
-                  <img
-                    onClick={(e) =>
-                      setCard({
-                        ...card,
-                        img: e.target.src,
-                      })
-                    }
-                    src={picked}
-                    alt="check"
-                  />
+                  <img src={picked} alt="check" />
                 </span>
-              </div> */}
-              <img key={photo.key} src={photo.src.original} alt={photo.alt} />
+              </div>
+              <img
+                src={photo.src.original}
+                alt={photo.alt}
+                onClick={() => changeImg(photo.src.original)}
+              />
             </div>
           );
         })}
