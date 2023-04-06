@@ -1,9 +1,17 @@
 header {
   width: 100%;
+  z-index: 2;
+  position: fixed;
+  top: 0;
   background: #fdfcf3;
   box-sizing: border-box;
   padding: 36px 41px 24px 40px;
 
+  @media screen and (max-width: 650px) {
+    & {
+      position: static;
+    }
+  }
   .header_content {
     max-width: 1440px;
     width: 100%;
@@ -43,7 +51,6 @@ header {
       }
 
       .buttons {
-
         max-width: 343px;
         width: 100%;
         display: flex;
@@ -51,7 +58,7 @@ header {
       }
     }
   }
-  .inputs_clone{
+  .inputs_clone {
     display: none;
   }
 }
@@ -60,12 +67,12 @@ header {
   header {
     .header_content {
       .input_btn {
-        .inputs{
+        .inputs {
           display: none;
         }
-      } 
+      }
     }
-    .inputs_clone{
+    .inputs_clone {
       display: flex;
       gap: 20px;
       justify-content: center;
@@ -78,14 +85,14 @@ header {
   header {
     .header_content {
       .input_btn {
-        .buttons{
+        .buttons {
           position: fixed;
           z-index: 1;
           bottom: 14px;
           left: 10px;
           right: 20px;
         }
-      } 
+      }
     }
   }
 }

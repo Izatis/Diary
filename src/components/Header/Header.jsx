@@ -28,8 +28,8 @@ const Header = ({ handleFilterOutCards }) => {
   // Состояние - для select
   const [select, setSelect] = useState("default");
 
-  // Функция - для сортировки карточек
-  const sortedCards = (e) => {
+  // Функция - для фильтирации карточек
+  const filterOutCards = (e) => {
     setSelect(e.target.value);
     handleFilterOutCards(e.target.value);
   };
@@ -59,7 +59,7 @@ const Header = ({ handleFilterOutCards }) => {
                 style={{ maxWidth: 100 }}
                 options={emoji}
                 value={select}
-                onChange={sortedCards}
+                onChange={filterOutCards}
               />
             </div>
           ) : null}
@@ -82,11 +82,17 @@ const Header = ({ handleFilterOutCards }) => {
       </div>
       {location.pathname === "/" ? (
         <div className={s.inputs_clone}>
-          <MyInput style={{ maxWidth: 800 }} placeholder="Поиск" />
+          <MyInput
+            style={{ maxWidth: 800 }}
+            placeholder="Поиск"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
           <MySelect
             style={{ maxWidth: 100 }}
-            onChange={(event) => sortedCards(event.target.value)}
             options={emoji}
+            value={select}
+            onChange={filterOutCards}
           />
         </div>
       ) : null}

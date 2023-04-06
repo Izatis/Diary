@@ -25,7 +25,6 @@ const CreateCard = () => {
   const { getPhotosBtn } = useContext(AddContext);
 
   // ----------------------------------------------------------------
-
   // Шаг-1. Состояние - для появление галочки
   const [cardImgId, setCardImgId] = useState(-1);
 
@@ -39,7 +38,6 @@ const CreateCard = () => {
   };
 
   // ----------------------------------------------------------------
-
   // Состояние - модалки, (общий)
   const [showModal, setModalActive] = useState(false);
 
@@ -55,7 +53,6 @@ const CreateCard = () => {
   }
 
   // ----------------------------------------------------------------
-
   // Функция - для создание карточки, (общий)
   const { createCard } = useContext(AddContext);
 
@@ -72,14 +69,12 @@ const CreateCard = () => {
   });
 
   // ====================================================================
-
   // Чтобы достать src картинку из модалки, с помощю функции
   const changeImg = (newSrc) => {
     setCard({ ...card, img: newSrc });
   };
 
   // ====================================================================
-
   // Добавленин карточки к главной ветке
   const addNewPost = () => {
     if (
@@ -112,7 +107,7 @@ const CreateCard = () => {
       <img
         className={s.clone_wallpaper}
         src={mountain}
-        alt={'mountain'}
+        alt={"mountain"}
         onClick={showModalFunc}
       />
       <ModalWallpaper

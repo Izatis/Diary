@@ -37,7 +37,7 @@ function App() {
 
   // Зарос на Api pixels
   const getPhotos = (query) => {
-    client.photos.search({ query, per_page: 5 }).then((photos) => {
+    client.photos.search({ query, per_page: 20 }).then((photos) => {
       setPhotos(photos.photos);
     });
   };

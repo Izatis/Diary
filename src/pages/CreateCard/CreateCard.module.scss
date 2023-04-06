@@ -2,8 +2,8 @@
   max-width: 1440px;
   display: flex;
   gap: 20px;
-  padding: 20px 40px 0 40px;
-  overflow: hidden;
+  margin: 140px 0;
+  padding: 0 40px;
 
   .clone_wallpaper {
     display: none;
@@ -130,7 +130,7 @@
 @media (max-width: 1024px) {
   .main {
     display: block;
-    padding: 20px 80px 0 80px;
+    padding: 0 80px;
     .createForm {
       .input_date_select {
         .date_select {
@@ -153,8 +153,8 @@
 
 @media (max-width: 650px) {
   .main {
-    padding: 0 20px 0 20px;
-
+    margin: 0 auto 140px;
+    padding: 0 20px;
     .clone_wallpaper {
       width: 100%;
       display: block;
