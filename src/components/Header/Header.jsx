@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import s from "./Header.module.scss";
 import icon from "../../assets/icon.png";
 import MyInput from "../MUI/MyInput/MyInput";
@@ -10,10 +10,8 @@ import MyButton from "../MUI/MyButton/MyButton";
 import emoji from "../../data/emoji.json";
 import { AddContext } from "../../pages/AddContext/AddContext";
 
-
-
 const Header = () => {
-const { cardData, setCardData } = useContext(AddContext);
+  const { cardData, setCardData } = useContext(AddContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,10 +29,7 @@ const { cardData, setCardData } = useContext(AddContext);
         <div className={s.input_btn}>
           {location.pathname === "/" ? (
             <div className={s.inputs}>
-              <MyInput
-                style={{ maxWidth: 480 }}
-                placeholder="Поиск"
-              />
+              <MyInput style={{ maxWidth: 480 }} placeholder="Поиск" />
               <MySelect
                 style={{ maxWidth: 100 }}
                 onChange={(event) => sortedCards(event.target.value)}
@@ -61,10 +56,7 @@ const { cardData, setCardData } = useContext(AddContext);
       </div>
       {location.pathname === "/" ? (
         <div className={s.inputs_clone}>
-          <MyInput
-            style={{ maxWidth: 800 }}
-            placeholder="Поиск"
-          />
+          <MyInput style={{ maxWidth: 800 }} placeholder="Поиск" />
           <MySelect
             style={{ maxWidth: 100 }}
             onChange={(event) => sortedCards(event.target.value)}

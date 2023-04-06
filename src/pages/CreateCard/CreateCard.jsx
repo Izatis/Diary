@@ -82,7 +82,7 @@ const CreateCard = () => {
   };
 
   return (
-    <div className={s.main}>
+    <section className={s.main}>
       <img
         className={s.clone_wallpaper}
         src={mountain}
@@ -136,7 +136,7 @@ const CreateCard = () => {
           <MyInput
             value={searchImg}
             onChange={(e) => setSearchImg(e.target.value)}
-            style={{ maxWidth: 596 }}
+            style={{ maxWidth: 789 }}
             placeholder="Поиск"
           />
           <MyButton
@@ -171,7 +171,7 @@ const CreateCard = () => {
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

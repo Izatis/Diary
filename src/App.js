@@ -4,11 +4,9 @@ import s from "./App.module.scss";
 import Header from "./components/Header/Header";
 import CreateCard from "./pages/CreateCard/CreateCard";
 import List from "./pages/List/List";
-import pen from "./assets/Mountain.png";
-import emoji from "./data/emoji.json";
 import { AddContext } from "./pages/AddContext/AddContext";
 import { createClient } from "pexels";
-// import data from './data/data'
+import data from "./data/data";
 
 function App() {
   /* Запрос на Api pixels */
@@ -78,16 +76,7 @@ function App() {
 
   // ==========================================================
 
-  const [cardData, setCardData] = useState([
-    {
-      id: 1,
-      title: "Побывал в горах",
-      description: "Сегодня я почувствовал детское волнение...",
-      mood: emoji[0].mood,
-      date: "Вт 14 янв",
-      img: pen,
-    },
-  ]);
+  const [cardData, setCardData] = useState(data);
 
   const createCard = (newPost) => {
     setCardData([...cardData, newPost]);

@@ -47,7 +47,7 @@ const ModalWallpaper = () => {
           <MyInput
             value={searchImg}
             onChange={(e) => setSearchImg(e.target.value)}
-            style={{ maxWidth: 500, height: 40 }}
+            style={{ height: 40 }}
             placeholder="Поиск"
           />
           <MyButton

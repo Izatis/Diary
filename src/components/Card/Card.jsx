@@ -10,7 +10,7 @@ const Card = ({ item, ...props }) => {
   return (
     <>
       <div className={s.card_main} onClick={openModal}>
-        <img src={item.img} alt="img" />
+        <img src={item.img} alt="card_image" />
         <button {...props} className={s.circle}>
           <span>{item.mood}</span>
         </button>
