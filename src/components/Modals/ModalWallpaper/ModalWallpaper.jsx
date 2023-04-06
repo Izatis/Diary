@@ -6,6 +6,7 @@ import search from "../../../assets/search.png";
 import picked from "../../../assets/picked.png";
 import MyInput from "../../MUI/MyInput/MyInput";
 import MyButton from "../../MUI/MyButton/MyButton";
+import Loading from "../../Loading/Loading";
 
 const ModalWallpaper = ({ changeImg, doNotShowModalFunc, showModal }) => {
   /* Запрос на Api pixels */
@@ -58,6 +59,8 @@ const ModalWallpaper = ({ changeImg, doNotShowModalFunc, showModal }) => {
             onClick={() => getPhotosBtn()}
           ></MyButton>
         </div>
+
+        <Loading style={{ left: "30%" }} />
 
         {photos.map((photo, index) => {
           return (

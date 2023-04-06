@@ -11,6 +11,7 @@ import MySelect from "../../components/MUI/MySelect/MySelect";
 import { AddContext } from "../AddContext/AddContext";
 import picked from "../../assets/picked.png";
 import ModalWallpaper from "../../components/Modals/ModalWallpaper/ModalWallpaper";
+import Loading from "../../components/Loading/Loading";
 
 const CreateCard = () => {
   /* Запрос на Api pixels */
@@ -25,8 +26,8 @@ const CreateCard = () => {
   const { getPhotosBtn } = useContext(AddContext);
 
   // ----------------------------------------------------------------
-  // Шаг-1. Состояние - для появление галочки
-  const [cardImgId, setCardImgId] = useState(-1);
+  // Шаг-1. Состояние - для появление галочки, (общий)
+  const { cardImgId, setCardImgId } = useContext(AddContext);
 
   // Шаг-2. Добавление стиля при клике на картинку (появление галочки)
   const imgPicked = (index) => {
@@ -158,7 +159,7 @@ const CreateCard = () => {
           />
         </div>
       </form>
-      <div className={s.search_wallpaper}>
+      <div className={s.search_wallpapers}>
         <form className={s.search}>
           <MyInput
             value={searchImg}
@@ -173,6 +174,9 @@ const CreateCard = () => {
             onClick={() => getPhotosBtn()}
           ></MyButton>
         </form>
+
+        <Loading />
+
         <div className={s.wallpapers}>
           {photos.map((photo, index) => {
             return (

@@ -37,7 +37,6 @@ const Card = ({ item }) => {
     const month = months[monthIndex];
     return `${dayOfWeek} ${day} ${month}`;
   }
-  console.log(item.date);
   return (
     <>
       <div className={s.card_main} onClick={() => setShowModal(true)}>

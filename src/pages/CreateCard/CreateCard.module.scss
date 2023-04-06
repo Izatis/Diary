@@ -38,7 +38,7 @@
 
     .add_block {
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
       margin-top: 20px;
       .add_btn {
         max-width: 174px;
@@ -46,7 +46,8 @@
     }
   }
 
-  .search_wallpaper {
+  .search_wallpapers {
+    position: relative;
     width: 100%;
     .search {
       display: flex;
@@ -184,13 +185,13 @@
       .add_block {
         .add_btn {
           max-width: 650px;
-          position: static;
           z-index: 0;
+          position: static;
         }
       }
     }
 
-    .search_wallpaper {
+    .search_wallpapers {
       display: none;
     }
   }

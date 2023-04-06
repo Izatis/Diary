@@ -24,7 +24,10 @@ function App() {
   };
 
   // ----------------------------------------------------------------
+  // Состояние - для  загрузки
+  const [isLoading, setIsLoading] = useState(true);
 
+  // ----------------------------------------------------------------
   /* Запрос на Api pixels */
 
   // Массив с картинками
@@ -36,11 +39,19 @@ function App() {
   );
 
   // Зарос на Api pixels
-  const getPhotos = (query) => {
-    client.photos.search({ query, per_page: 20 }).then((photos) => {
+  const getPhotos = async (query) => {
+    setIsLoading(true);
+    await client.photos.search({ query, per_page: 5 }).then((photos) => {
       setPhotos(photos.photos);
     });
+    setIsLoading(false);
   };
+
+  // ====================================================================
+  // В начале загрузки
+  useEffect(() => {
+    getPhotos("Nature");
+  }, []);
 
   // Значения инпута (общий)
   const [searchImg, setSearchImg] = useState("");
@@ -54,11 +65,6 @@ function App() {
       setSearchImg("");
     }
   };
-
-  // В начале загрузки
-  useEffect(() => {
-    getPhotos("Nature");
-  }, []);
 
   // ----------------------------------------------------------------
 
@@ -94,6 +100,10 @@ function App() {
     );
   }, [searchValue, filteredCards]);
 
+  // ----------------------------------------------------------------
+  // Шаг-1. Состояние - для появление галочки, (общий)
+  const [cardImgId, setCardImgId] = useState(-1);
+
   return (
     <AddContext.Provider
       value={{
@@ -106,6 +116,9 @@ function App() {
         setSearchImg,
         searchValue,
         setSearchValue,
+        cardImgId,
+        setCardImgId,
+        isLoading,
       }}
     >
       <Header handleFilterOutCards={handleFilterOutCards} />
