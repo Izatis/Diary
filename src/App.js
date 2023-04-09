@@ -124,8 +124,8 @@ function App() {
       <Header handleFilterOutCards={handleFilterOutCards} />
       <Routes>
         <Route path="/createCard" element={<CreateCard />} />
-
         <Route path="/" element={<List readyСards={searchCard} />} />
+        <Route path="*" element={<h1 className="error">ERROR 404</h1>} />
       </Routes>
     </AddContext.Provider>
   );
