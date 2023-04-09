@@ -34,6 +34,9 @@ const ModalWallpaper = ({ changeImg, doNotShowModalFunc, showModal }) => {
     }
   };
 
+  // Состояние - для  загрузки, (общий)
+  const { isLoading } = useContext(AddContext);
+
   return (
     <div
       className={showModal ? cn(s.modal, s.modal_active) : s.modal}
@@ -45,7 +48,7 @@ const ModalWallpaper = ({ changeImg, doNotShowModalFunc, showModal }) => {
         }
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={s.input_btn}>
+        <form onSubmit={getPhotosBtn} className={s.input_btn}>
           <MyInput
             value={searchImg}
             onChange={(e) => setSearchImg(e.target.value)}
@@ -53,35 +56,38 @@ const ModalWallpaper = ({ changeImg, doNotShowModalFunc, showModal }) => {
             placeholder="Поиск"
           />
           <MyButton
+            type="submit"
             className={s.search_btn}
             style={{ background: "#fff76a" }}
             img={search}
-            onClick={() => getPhotosBtn()}
+            onClick={getPhotosBtn}
           ></MyButton>
-        </div>
+        </form>
 
-        <Loading style={{ left: "30%" }} />
-
-        {photos.map((photo, index) => {
-          return (
-            <div
-              key={photo.id}
-              onClick={() => setCardImgIdSecond(index)}
-              className={s.wallpaper}
-            >
-              <div className={imgPickedSecond(index)}>
-                <span>
-                  <img src={picked} alt="check" />
-                </span>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          photos.map((photo, index) => {
+            return (
+              <div
+                key={photo.id}
+                onClick={() => setCardImgIdSecond(index)}
+                className={s.wallpaper}
+              >
+                <div className={imgPickedSecond(index)}>
+                  <span>
+                    <img src={picked} alt="check" />
+                  </span>
+                </div>
+                <img
+                  src={photo.src.original}
+                  alt={photo.alt}
+                  onClick={() => changeImg(photo.src.original)}
+                />
               </div>
-              <img
-                src={photo.src.original}
-                alt={photo.alt}
-                onClick={() => changeImg(photo.src.original)}
-              />
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );

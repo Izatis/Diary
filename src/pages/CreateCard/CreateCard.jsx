@@ -103,6 +103,10 @@ const CreateCard = () => {
     }
   };
 
+  // ----------------------------------------------------------------
+  // Состояние - для  загрузки, (общий)
+  const { isLoading } = useContext(AddContext);
+
   return (
     <section className={s.main}>
       <img
@@ -160,7 +164,7 @@ const CreateCard = () => {
         </div>
       </form>
       <div className={s.search_wallpapers}>
-        <form className={s.search}>
+        <form onSubmit={getPhotosBtn} className={s.search}>
           <MyInput
             value={searchImg}
             onChange={(e) => setSearchImg(e.target.value)}
@@ -168,42 +172,44 @@ const CreateCard = () => {
             placeholder="Поиск"
           />
           <MyButton
+            type="submit"
             className={s.search_btn}
             style={{ background: "#fff76a" }}
             img={search}
-            onClick={() => getPhotosBtn()}
           ></MyButton>
         </form>
 
-        <Loading />
-
-        <div className={s.wallpapers}>
-          {photos.map((photo, index) => {
-            return (
-              <div
-                key={photo.id}
-                onClick={() => setCardImgId(index)}
-                className={s.wallpaper}
-              >
-                <div className={imgPicked(index)}>
-                  <span>
-                    <img src={picked} alt="check" />
-                  </span>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className={s.wallpapers}>
+            {photos.map((photo, index) => {
+              return (
+                <div
+                  key={photo.id}
+                  onClick={() => setCardImgId(index)}
+                  className={s.wallpaper}
+                >
+                  <div className={imgPicked(index)}>
+                    <span>
+                      <img src={picked} alt="check" />
+                    </span>
+                  </div>
+                  <img
+                    src={photo.src.original}
+                    alt={photo.alt}
+                    onClick={(e) =>
+                      setCard({
+                        ...card,
+                        img: e.target.src,
+                      })
+                    }
+                  />
                 </div>
-                <img
-                  src={photo.src.original}
-                  alt={photo.alt}
-                  onClick={(e) =>
-                    setCard({
-                      ...card,
-                      img: e.target.src,
-                    })
-                  }
-                />
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -46,7 +46,6 @@ function App() {
     });
     setIsLoading(false);
   };
-
   // ====================================================================
   // В начале загрузки
   useEffect(() => {
@@ -57,7 +56,8 @@ function App() {
   const [searchImg, setSearchImg] = useState("");
 
   // Условие на кнопку поиска
-  const getPhotosBtn = () => {
+  const getPhotosBtn = (event) => {
+    event.preventDefault();
     if (searchImg.trim() === "") {
       alert("Поле ввода пустое!");
     } else {

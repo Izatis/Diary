@@ -1,14 +1,11 @@
 .lds_circle {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 2;
-  position: absolute;
-  top: 220px;
-  left: 30%;
   transform: translateZ(1px);
-  opacity: 0;
   div {
     width: 64px;
     height: 64px;
@@ -26,11 +23,6 @@
     line-height: 42px;
     color: #61b15a;
   }
-}
-
-.lds_circle_active {
-  opacity: 1;
-  transition: 0.2s;
 }
 
 @keyframes lds_circle {
