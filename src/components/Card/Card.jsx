@@ -1,14 +1,11 @@
 import React, { useContext, useState } from "react";
 import s from "./Card.module.scss";
-import ModalCard from "../Modals/ModalCard/ModalCard";
 import { AddContext } from "../../pages/AddContext/AddContext";
+import useBodyScrollLock from "../../hooks/useBodyScrollLock";
+
+import ModalCard from "../Modals/ModalCard/ModalCard";
 
 const Card = ({ item }) => {
-  // Здесь мы создаем отдельное состояние для каждой карточки, а глобальное состояние не подходить
-  // Состояние - для каждой карточки
-  const [showModal, setShowModal] = useState(false);
-
-  // ----------------------------------------------------------------
   // Функция - для удаление карточек, (общий)
   const { removeCard } = useContext(AddContext);
 
@@ -37,9 +34,25 @@ const Card = ({ item }) => {
     const month = months[monthIndex];
     return `${dayOfWeek} ${day} ${month}`;
   }
+
+  // ----------------------------------------------------------------
+
+  // Здесь мы создаем отдельное состояние для каждой карточки, а глобальное состояние не подходить
+  // Состояние - для каждой карточки
+  const [showModal, setShowModal] = useState(false);
+
+  // Состояние - для запрета прокрутки когда модалка открыта
+  const [isLocked, setIsLocked] = useBodyScrollLock();
+
+  // Function - для showModal и isLocked
+  const handleClick = () => {
+    setShowModal(!showModal);
+    setIsLocked(!isLocked);
+  };
+
   return (
     <>
-      <div className={s.card_main} onClick={() => setShowModal(true)}>
+      <div className={s.card_main} onClick={handleClick}>
         <img src={item.img} alt="card_image" />
         <button
           className={s.circle}
@@ -53,9 +66,8 @@ const Card = ({ item }) => {
             <p>{formatDate(item.date)}</p>
           </div>
           <div className={s.description}>
-             <p>{item.description.split(' ').slice(0, 5).join(' ')}...</p>
+            <p>{item.description.split(" ").slice(0, 5).join(" ")}...</p>
           </div>
-         
         </div>
       </div>
       <ModalCard

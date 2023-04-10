@@ -8,7 +8,7 @@ import MyInput from "../../MUI/MyInput/MyInput";
 import MyButton from "../../MUI/MyButton/MyButton";
 import Loading from "../../Loading/Loading";
 
-const ModalWallpaper = ({ changeImg, doNotShowModalFunc, showModal }) => {
+const ModalWallpaper = ({ changeImg, showModal, setShowModal }) => {
   /* Запрос на Api pixels */
 
   // Значение инпута, (общий)
@@ -39,8 +39,8 @@ const ModalWallpaper = ({ changeImg, doNotShowModalFunc, showModal }) => {
 
   return (
     <div
-      className={showModal ? cn(s.modal, s.modal_active) : s.modal}
-      onClick={doNotShowModalFunc}
+      className={showModal ? cn(s.modal, s.show_modal) : s.modal}
+      onClick={() => setShowModal(!showModal)}
     >
       <div
         className={

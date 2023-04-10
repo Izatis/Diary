@@ -1,15 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import s from "./CreateCard.module.scss";
-import MyInput from "../../components/MUI/MyInput/MyInput";
+import { AddContext } from "../AddContext/AddContext";
+import { useNavigate } from "react-router-dom";
+import useBodyScrollLock from "../../hooks/useBodyScrollLock";
+
 import search from "../../assets/search.png";
-import MyButton from "../../components/MUI/MyButton/MyButton";
+import picked from "../../assets/picked.png";
 import add from "../../assets/add.png";
 import mountain from "../../assets/Rectangle 3.png";
 import emoji from "../../data/emoji.json";
-import { useNavigate } from "react-router-dom";
+import MyInput from "../../components/MUI/MyInput/MyInput";
 import MySelect from "../../components/MUI/MySelect/MySelect";
-import { AddContext } from "../AddContext/AddContext";
-import picked from "../../assets/picked.png";
+import MyButton from "../../components/MUI/MyButton/MyButton";
 import ModalWallpaper from "../../components/Modals/ModalWallpaper/ModalWallpaper";
 import Loading from "../../components/Loading/Loading";
 
@@ -40,18 +42,16 @@ const CreateCard = () => {
 
   // ----------------------------------------------------------------
   // Состояние - модалки, (общий)
-  const [showModal, setModalActive] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-  // Для предотвращения скроллинга заднего содержимого при открытии модального окна
-  function showModalFunc() {
-    setModalActive(true);
-    document.body.style.overflow = "hidden";
-  }
+  // Состояние - для запрета прокрутки когда модалка открыта
+  const [isLocked, setIsLocked] = useBodyScrollLock();
 
-  function doNotShowModalFunc() {
-    setModalActive(false);
-    document.body.style.overflow = "auto";
-  }
+  // Function - для showModal и isLocked
+  const handleClick = () => {
+    setShowModal(!showModal);
+    setIsLocked(!isLocked);
+  };
 
   // ----------------------------------------------------------------
   // Функция - для создание карточки, (общий)
@@ -113,14 +113,14 @@ const CreateCard = () => {
         className={s.clone_wallpaper}
         src={mountain}
         alt={"mountain"}
-        onClick={showModalFunc}
+        onClick={handleClick}
       />
       <ModalWallpaper
         changeImg={changeImg}
         card={card}
         setCard={setCard}
-        doNotShowModalFunc={doNotShowModalFunc}
         showModal={showModal}
+        setShowModal={setShowModal}
       />
 
       {/* Управляемый компонент */}

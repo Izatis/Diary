@@ -29,7 +29,7 @@ const ModalCard = ({ item, showModal, setShowModal }) => {
 
   return (
     <div
-      className={showModal ? cn(s.modal, s.modal_active) : s.modal}
+      className={showModal ? cn(s.modal, s.show_modal) : s.modal}
       onClick={() => setShowModal(false)}
     >
       <div
