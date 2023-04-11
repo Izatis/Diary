@@ -76,6 +76,16 @@ const CreateCard = () => {
   };
 
   // ====================================================================
+  // Состояние - для select
+  const [option, setOption] = useState("default");
+
+  // Функция - для отслеживание option
+  const choiceOfOption = (e) => {
+    setOption(e.target.value),
+    setCard({ ...card, mood: e.target.value });
+  };
+
+  // ====================================================================
   // Добавленин карточки к главной ветке
   const addNewPost = () => {
     if (
@@ -120,7 +130,7 @@ const CreateCard = () => {
         card={card}
         setCard={setCard}
         showModal={showModal}
-        setShowModal={setShowModal}
+        handleClick={handleClick}
       />
 
       {/* Управляемый компонент */}
@@ -137,7 +147,8 @@ const CreateCard = () => {
               className={s.createMood}
               style={{ maxWidth: 100 }}
               options={emoji}
-              onChange={(e) => setCard({ ...card, mood: e.target.value })}
+              value={option}
+              onChange={choiceOfOption}
             />
 
             <MyInput

@@ -26,11 +26,11 @@ const Header = ({ handleFilterOutCards }) => {
   // ----------------------------------------------------------------
 
   // Состояние - для select
-  const [select, setSelect] = useState("default");
+  const [option, setOption] = useState("default");
 
   // Функция - для фильтирации карточек
   const filterOutCards = (e) => {
-    setSelect(e.target.value);
+    setOption(e.target.value);
     handleFilterOutCards(e.target.value);
   };
 
@@ -58,7 +58,7 @@ const Header = ({ handleFilterOutCards }) => {
               <MySelect
                 style={{ maxWidth: 100 }}
                 options={emoji}
-                value={select}
+                value={option}
                 onChange={filterOutCards}
               />
             </div>
@@ -91,7 +91,7 @@ const Header = ({ handleFilterOutCards }) => {
           <MySelect
             style={{ maxWidth: 100 }}
             options={emoji}
-            value={select}
+            value={option}
             onChange={filterOutCards}
           />
         </div>

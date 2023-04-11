@@ -5,7 +5,7 @@ import smile from "../../../assets/smile.png";
 const MySelect = ({ options, ...props }) => {
   return (
     <select {...props}>
-      <option value="default" style={{ fontSize: 30 }}>
+      <option value="default" style={{ fontSize: 30 }} disabled>
       ☺
       </option>
       {options.map((option) => (

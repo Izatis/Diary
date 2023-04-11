@@ -70,11 +70,7 @@ const Card = ({ item }) => {
           </div>
         </div>
       </div>
-      <ModalCard
-        item={item}
-        showModal={showModal}
-        setShowModal={setShowModal}
-      />
+      <ModalCard item={item} showModal={showModal} handleClick={handleClick} />
     </>
   );
 };
