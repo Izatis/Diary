@@ -185,7 +185,7 @@ const CreateCard = () => {
             className={s.search__btn}
             style={{ background: "#fff76a" }}
             img={search}
-          ></MyButton>
+          />
         </form>
 
         {isLoading ? (

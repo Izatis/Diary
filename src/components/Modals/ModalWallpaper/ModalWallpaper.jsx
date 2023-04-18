@@ -61,7 +61,7 @@ const ModalWallpaper = ({ changeImg, showModal, handleClick }) => {
             style={{ background: "#fff76a" }}
             img={search}
             onClick={getPhotosBtn}
-          ></MyButton>
+          />
         </form>
 
         {isLoading ? (
