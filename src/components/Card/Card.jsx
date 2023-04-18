@@ -52,20 +52,20 @@ const Card = ({ item }) => {
 
   return (
     <>
-      <div className={s.card_main} onClick={handleClick}>
+      <div className={s.card} onClick={handleClick}>
         <img src={item.img} alt="card_image" />
         <button
-          className={s.circle}
+          className={s.card__btn}
           onClick={(event) => removeCard(item, event)}
         >
           <span>{item.mood}</span>
         </button>
-        <div className={s.text_block}>
-          <div className={s.title_date}>
+        <div className={s.card__text}>
+          <div className={s.card__title}>
             <h3>{item.title}</h3>
             <p>{formatDate(item.date)}</p>
           </div>
-          <div className={s.description}>
+          <div className={s.card__description}>
             <p>{item.description.split(" ").slice(0, 5).join(" ")}...</p>
           </div>
         </div>

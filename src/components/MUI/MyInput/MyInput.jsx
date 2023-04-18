@@ -1,9 +1,9 @@
 import React from "react";
-import "./MyInput.module.scss";
+import  s from "./MyInput.module.scss";
 
 function MyInput({...props}) {
   return (
-      <input type="text" {...props} required minLength={1}/>
+      <input className={s.myInput} type="text" {...props} required minLength={1}/>
   );
 }
 

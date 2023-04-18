@@ -12,7 +12,7 @@
   box-sizing: border-box;
   padding: 0 20px;
 
-  .modal_content {
+  .modal__content {
     max-width: 400px;
     transform: scale(0.5);
     transition: 0.4s all;
@@ -20,13 +20,13 @@
     &.modal_active {
       transform: scale(1);
     }
-    .input_btn {
+    .search {
       width: 100%;
       display: flex;
       gap: 10px;
       margin: 20px 0;
       box-sizing: border-box;
-      .search_btn {
+      .search__btn {
         max-width: 40px;
         img {
           margin: 0;
@@ -39,7 +39,7 @@
       width: 100%;
       position: relative;
       margin: 10px 0;
-      .imgPicked {
+      .wallpaper__picked {
         width: 60px;
         height: 60px;
         border-radius: 30px;
@@ -54,7 +54,7 @@
         transform: translate(-50%, -50%);
         transition: 0, 5s;
       }
-      .imgNotPicked {
+      .wallpaper__notPicked {
         display: none;
       }
       img {
@@ -67,7 +67,7 @@
   }
 }
 
-.show_modal {
+.show {
   opacity: 1;
   pointer-events: all;
 }

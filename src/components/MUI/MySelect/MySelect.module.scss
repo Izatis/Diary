@@ -1,4 +1,4 @@
-select{
+.mySelect{
     width: 100%;
     min-width: 60px;
     height: 60px;
@@ -7,12 +7,12 @@ select{
     font-size: 30px;
 }
 
-select:hover{
+.mySelect:hover{
     border: 1px solid blue;
 }
 
 @media (max-width: 500px) {
-    select{
+    .mySelect{
       height: 40px;
     }
   }

@@ -1,4 +1,4 @@
-header {
+.header {
   width: 100%;
   z-index: 2;
   position: fixed;
@@ -12,13 +12,13 @@ header {
       position: static;
     }
   }
-  .header_content {
+  .header__content {
     max-width: 1440px;
     width: 100%;
     display: flex;
     align-items: center;
     margin: 0 auto;
-    .icon_text {
+    .title {
       max-width: 400px;
       width: 100%;
       display: flex;
@@ -38,20 +38,20 @@ header {
       }
     }
 
-    .input_btn {
+    .interaction {
       width: 100%;
       display: flex;
       align-items: center;
       flex: end;
       justify-content: flex-end;
       gap: 35px;
-      .inputs {
+      .interaction__inputs {
         width: 100%;
         display: flex;
         gap: 14px;
       }
 
-      .buttons {
+      .interaction__btns {
         max-width: 343px;
         width: 100%;
         display: flex;
@@ -65,10 +65,10 @@ header {
 }
 
 @media (max-width: 1070px) {
-  header {
-    .header_content {
-      .input_btn {
-        .inputs {
+  .header {
+    .header__content {
+      .interaction {
+        .interaction__inputs {
           display: none;
         }
       }
@@ -83,10 +83,10 @@ header {
 }
 
 @media (max-width: 650px) {
-  header {
-    .header_content {
-      .input_btn {
-        .buttons {
+  .header {
+    .header__content {
+      .interaction {
+        .interaction__btns {
           position: fixed;
           z-index: 1;
           bottom: 14px;

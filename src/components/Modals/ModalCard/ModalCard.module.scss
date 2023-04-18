@@ -14,7 +14,7 @@
   padding: 0 40px;
   box-sizing: border-box;
 
-  .modal_content {
+  .modal__content {
     max-width: 2000px;
     width: 100%;
     position: relative;
@@ -27,26 +27,26 @@
     padding: 44px 40px 60px 40px;
     box-sizing: border-box;
 
-    &.modal_active {
+    &.active {
       transform: scale(1);
     }
 
-    .modal_header {
+    .modal__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      .close {
+      .modal__close {
         position: absolute;
         top: 10px;
         right: 10px;
         padding: 10px;
         cursor: pointer;
       }
-      .mood_title {
+      .modal__title {
         display: flex;
         align-items: center;
         gap: 20px;
-        .mood {
+        .modal__mood {
           font-size: 48px;
         }
         h1 {
@@ -57,7 +57,7 @@
           margin: 0;
         }
       }
-      .date {
+      .modal__date {
         font-weight: 300;
         font-size: 24px;
         line-height: 28px;
@@ -65,13 +65,13 @@
       }
     }
 
-    .modal_img_description {
+    .modal__hero {
       display: flex;
       align-items: center;
       gap: 40px;
       margin-top: 39px;
 
-      .modal_img {
+      .modal__img {
         max-width: 600px;
         min-width: 300px;
         img {
@@ -80,7 +80,7 @@
         }
       }
 
-      .description {
+      .modal__description {
         max-width: 500px;
         p {
           font-weight: 300;
@@ -92,17 +92,17 @@
       }
     }
 
-    .clone {
+    .modal__clone {
       display: none;
     }
 
-    .description_clone {
+    .modal__description_clone {
       display: none;
     }
   }
 }
 
-.show_modal {
+.show {
   opacity: 1;
   pointer-events: all;
 }
@@ -110,31 +110,31 @@
 @media screen and (max-width: 1024px) {
   .modal {
     padding: 80px;
-    .modal_content {
+    .modal__content {
       padding: 60px 40px 60px 40px;
-      .modal_header {
+      .modal__header {
         display: none;
       }
-      .modal_img_description {
+      .modal__hero {
         display: none;
       }
-      .clone {
+      .modal__clone {
         display: block;
-        .modal_header_clone {
+        .modal__header_clone {
           display: flex;
           align-items: center;
           gap: 32px;
-          .close {
+          .modal__close {
             position: absolute;
             top: 10px;
             right: 10px;
             padding: 10px;
             cursor: pointer;
           }
-          .mood {
+          .modal__mood {
             font-size: 36px;
           }
-          .title_date {
+          .modal__title_clone {
             max-width: 800px;
             width: 100%;
             display: flex;
@@ -152,7 +152,7 @@
                 }
               }
             }
-            .date {
+            .modal__date {
               font-weight: 300;
               font-size: 18px;
               line-height: 21px;
@@ -160,7 +160,7 @@
             }
           }
         }
-        .modal_img_clone {
+        .modal__img_clone {
           max-width: 381px;
           margin-top: 40px;
           img {
@@ -169,7 +169,7 @@
           }
         }
       }
-      .description_clone {
+      .modal__description_clone {
         display: block;
         font-weight: 300;
         font-size: 18px;
@@ -184,38 +184,38 @@
 @media screen and (max-width: 668px) {
   .modal {
     padding: 0;
-    .modal_content {
+    .modal__content {
       width: 100vw;
       height: 100vh;
       padding: 0;
-      .clone {
+      .modal__clone {
         display: flex;
         flex-direction: column-reverse;
-        .modal_header_clone {
+        .modal__header_clone {
           display: flex;
           gap: 12px;
-          .close {
+          .modal__close {
             position: absolute;
             top: 365px;
             right: 20px;
             cursor: pointer;
           }
-          .mood {
+          .modal__mood {
             font-size: 18px;
             margin-left: 20px;
           }
-          .title_date {
+          .modal__title_clone {
             width: 100%;
             display: block;
             h1 {
               font-size: 18px;
             }
-            .date {
+            .modal__date {
               font-size: 12px;
             }
           }
         }
-        .modal_img_clone {
+        .modal__img_clone {
           max-width: 1440px;
           width: 100%;
           margin-top: 0;
@@ -224,7 +224,7 @@
           }
         }
       }
-      .description_clone {
+      .modal__description_clone {
         font-size: 16px;
         margin: 17px 20px;
       }

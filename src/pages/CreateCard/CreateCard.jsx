@@ -34,9 +34,9 @@ const CreateCard = () => {
   // Шаг-2. Добавление стиля при клике на картинку (появление галочки)
   const imgPicked = (index) => {
     if (cardImgId === index) {
-      return s.imgPicked;
+      return s.wallpaper__picked;
     } else {
-      return s.imgNotPicked;
+      return s.wallpaper__notPicked;
     }
   };
 
@@ -81,8 +81,7 @@ const CreateCard = () => {
 
   // Функция - для отслеживание option
   const choiceOfOption = (e) => {
-    setOption(e.target.value),
-    setCard({ ...card, mood: e.target.value });
+    setOption(e.target.value), setCard({ ...card, mood: e.target.value });
   };
 
   // ====================================================================
@@ -118,9 +117,9 @@ const CreateCard = () => {
   const { isLoading } = useContext(AddContext);
 
   return (
-    <section className={s.main}>
+    <section className={s.create}>
       <img
-        className={s.clone_wallpaper}
+        className={s.wallpaper_clone}
         src={mountain}
         alt={"mountain"}
         onClick={handleClick}
@@ -134,17 +133,16 @@ const CreateCard = () => {
       />
 
       {/* Управляемый компонент */}
-      <form className={s.createForm}>
-        <div className={s.input_date_select}>
+      <form className={s.create__form}>
+        <div className={s.inputs}>
           <MyInput
             style={{ maxWidth: 670 }}
             value={card.title}
             placeholder="Название"
             onChange={(e) => setCard({ ...card, title: e.target.value })}
           />
-          <div className={s.date_select}>
+          <div className={s.inputs__select_date}>
             <MySelect
-              className={s.createMood}
               style={{ maxWidth: 100 }}
               options={emoji}
               value={option}
@@ -164,9 +162,9 @@ const CreateCard = () => {
           onChange={(e) => setCard({ ...card, description: e.target.value })}
           placeholder="Описание"
         ></textarea>
-        <div className={s.add_block}>
+        <div className={s.add}>
           <MyButton
-            className={s.add_btn}
+            className={s.add__btn}
             img={add}
             text={"Создать"}
             background={"linear-gradient(135deg, #61B15A 0%, #ADCE74 100%)"}
@@ -174,8 +172,8 @@ const CreateCard = () => {
           />
         </div>
       </form>
-      <div className={s.search_wallpapers}>
-        <form onSubmit={getPhotosBtn} className={s.search}>
+      <div className={s.search}>
+        <form onSubmit={getPhotosBtn} className={s.search__form}>
           <MyInput
             value={searchImg}
             onChange={(e) => setSearchImg(e.target.value)}
@@ -184,7 +182,7 @@ const CreateCard = () => {
           />
           <MyButton
             type="submit"
-            className={s.search_btn}
+            className={s.search__btn}
             style={{ background: "#fff76a" }}
             img={search}
           ></MyButton>
@@ -197,9 +195,9 @@ const CreateCard = () => {
             {photos.map((photo, index) => {
               return (
                 <div
+                  className={s.wallpaper}
                   key={photo.id}
                   onClick={() => setCardImgId(index)}
-                  className={s.wallpaper}
                 >
                   <div className={imgPicked(index)}>
                     <span>

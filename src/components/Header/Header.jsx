@@ -40,15 +40,15 @@ const Header = ({ handleFilterOutCards }) => {
   const { searchValue, setSearchValue } = useContext(AddContext);
 
   return (
-    <header>
-      <div className={s.header_content}>
-        <div className={s.icon_text} onClick={() => navigate("/")}>
+    <header className={s.header}>
+      <div className={s.header__content}>
+        <div className={s.title} onClick={() => navigate("/")}>
           <img src={icon} alt="icon" />
           <h1>Дневник</h1>
         </div>
-        <div className={s.input_btn}>
+        <div className={s.interaction}>
           {location.pathname === "/" ? (
-            <div className={s.inputs}>
+            <div className={s.interaction__inputs}>
               <MyInput
                 style={{ maxWidth: 480 }}
                 placeholder="Поиск"
@@ -63,7 +63,7 @@ const Header = ({ handleFilterOutCards }) => {
               />
             </div>
           ) : null}
-          <div className={s.buttons}>
+          <div className={s.interaction__btns}>
             <MyButton
               style={{ maxWidth: 167, background: "#FFCE89", color: "black" }}
               img={square}

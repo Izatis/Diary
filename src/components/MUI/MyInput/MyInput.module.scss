@@ -1,4 +1,4 @@
-input {
+.myInput {
   width: 100%;
   min-width: 200px;
   height: 60px;
@@ -14,16 +14,16 @@ input {
   padding-left: 16px;
 }
 
-input:hover {
+.myInput:hover {
   border: 1px solid blue;
 }
 
-input::placeholder{
+.myInput::placeholder{
   color: #ACACAC;
 }
 
 @media (max-width: 500px) {
-  input{
+  .myInput{
     height: 40px;
   }
 }

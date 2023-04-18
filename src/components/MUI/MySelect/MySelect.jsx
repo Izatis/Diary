@@ -1,12 +1,11 @@
 import React from "react";
 import s from "./MySelect.module.scss";
-import smile from "../../../assets/smile.png";
 
 const MySelect = ({ options, ...props }) => {
   return (
-    <select {...props}>
-      <option value="default" style={{ fontSize: 30 }} disabled>
-      ☺
+    <select className={s.mySelect} {...props}>
+      <option style={{ fontSize: 30 }} value="default" disabled>
+        ☺
       </option>
       {options.map((option) => (
         <option key={option.id}>{option.mood}</option>
