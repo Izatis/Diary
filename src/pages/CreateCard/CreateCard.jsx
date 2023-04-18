@@ -141,7 +141,7 @@ const CreateCard = () => {
             placeholder="Название"
             onChange={(e) => setCard({ ...card, title: e.target.value })}
           />
-          <div className={s.inputs__select_date}>
+          <div className={s.inputs__select}>
             <MySelect
               style={{ maxWidth: 100 }}
               options={emoji}

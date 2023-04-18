@@ -13,7 +13,7 @@
     width: 100%;
     .inputs {
       display: flex;
-      .inputs__select_date {
+      .inputs__select {
         display: flex;
         select {
           margin: 0 16px 16px 16px;
@@ -133,7 +133,7 @@
     padding: 0 80px;
     .create__form {
       .inputs {
-        .inputs__select_date {
+        .inputs__select {
           select {
             margin: 0 16px 16px 16px;
           }
@@ -167,7 +167,7 @@
       margin-bottom: 142px;
       .inputs {
         display: block;
-        .inputs__select_date {
+        .inputs__select {
           flex-direction: row-reverse;
           justify-content: start;
           align-items: center;
