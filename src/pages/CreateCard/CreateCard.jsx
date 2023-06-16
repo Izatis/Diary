@@ -42,14 +42,14 @@ const CreateCard = () => {
 
   // ----------------------------------------------------------------
   // Состояние - модалки, (общий)
-  const [showModal, setShowModal] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
 
   // Состояние - для запрета прокрутки когда модалка открыта
   const [isLocked, setIsLocked] = useBodyScrollLock();
 
-  // Function - для showModal и isLocked
+  // Function - для activeModal и isLocked
   const handleClick = () => {
-    setShowModal(!showModal);
+    setActiveModal(!activeModal);
     setIsLocked(!isLocked);
   };
 
@@ -128,7 +128,7 @@ const CreateCard = () => {
         changeImg={changeImg}
         card={card}
         setCard={setCard}
-        showModal={showModal}
+        activeModal={activeModal}
         handleClick={handleClick}
       />
 

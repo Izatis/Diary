@@ -2,7 +2,7 @@ import React from "react";
 import s from "./ModalCard.module.scss";
 import cn from "classnames";
 
-const ModalCard = ({ item, showModal, handleClick }) => {
+const ModalCard = ({ item, activeModal, handleClick }) => {
   // Функция - отформатировки даты
   function formatDate(dateString) {
     const months = [
@@ -29,16 +29,16 @@ const ModalCard = ({ item, showModal, handleClick }) => {
 
   return (
     <div
-      className={showModal ? cn(s.modal, s.show) : s.modal}
+      className={activeModal ? cn(s.modal, s.active) : s.modal}
       onClick={handleClick}
     >
       <div
         className={
-          showModal ? cn(s.modal__content, s.active) : s.modal__content
+          activeModal ? cn(s.modal__content, s.active) : s.modal__content
         }
         onClick={(e) => e.stopPropagation()}
       >
-        {showModal && (
+        {activeModal && (
           <>
             <div className={s.modal__header}>
               <span className={s.modal__close} onClick={handleClick}>

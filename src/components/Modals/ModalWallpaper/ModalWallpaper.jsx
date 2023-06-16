@@ -8,7 +8,7 @@ import MyInput from "../../MUI/MyInput/MyInput";
 import MyButton from "../../MUI/MyButton/MyButton";
 import Loading from "../../Loading/Loading";
 
-const ModalWallpaper = ({ changeImg, showModal, handleClick }) => {
+const ModalWallpaper = ({ changeImg, activeModal, handleClick }) => {
   /* Запрос на Api pixels */
 
   // Значение инпута, (общий)
@@ -39,12 +39,12 @@ const ModalWallpaper = ({ changeImg, showModal, handleClick }) => {
 
   return (
     <div
-      className={showModal ? cn(s.modal, s.show) : s.modal}
+      className={activeModal ? cn(s.modal, s.show) : s.modal}
       onClick={handleClick}
     >
       <div
         className={
-          showModal ? cn(s.modal__content, s.active) : s.modal__content
+          activeModal ? cn(s.modal__content, s.active) : s.modal__content
         }
         onClick={(e) => e.stopPropagation()}
       >

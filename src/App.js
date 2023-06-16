@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 import CreateCard from "./pages/CreateCard/CreateCard";
-import List from "./pages/List/List";
 import { AddContext } from "./pages/AddContext/AddContext";
 import { createClient } from "pexels";
 import data from "./data/data";
@@ -17,14 +16,14 @@ function App() {
     setCardData([...cardData, newPost]);
   };
 
-  // Функция - для удоление карточек
+  // Функция - для удаление карточек
   const removeCard = (item, event) => {
     event.stopPropagation();
     setCardData(cardData.filter((current) => current.id !== item.id));
   };
 
   // ----------------------------------------------------------------
-  // Состояние - для  загрузки
+  // Состояния - для загрузки
   const [isLoading, setIsLoading] = useState(true);
 
   // ----------------------------------------------------------------
@@ -124,7 +123,7 @@ function App() {
       <Header handleFilterOutCards={handleFilterOutCards} />
       <Routes>
         <Route path="/createCard" element={<CreateCard />} />
-        <Route path="/" element={<List readyСards={searchCard} />} />
+        <Route path="/" element={<CardList readyСards={searchCard} />} />
         <Route path="*" element={<h1 className="error">ERROR 404</h1>} />
       </Routes>
     </AddContext.Provider>

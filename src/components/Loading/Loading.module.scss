@@ -6,7 +6,7 @@
   justify-content: center;
   z-index: 2;
   transform: translateZ(1px);
-  div {
+  .loading__content {
     width: 64px;
     height: 64px;
     display: inline-block;
@@ -15,7 +15,7 @@
     animation: lds_circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
     margin: 8px;
   }
-  h1 {
+  h2 {
     font-family: "Roboto", sans-serif;
     font-style: normal;
     font-weight: 700;

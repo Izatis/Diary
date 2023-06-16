@@ -39,14 +39,14 @@ const Card = ({ item }) => {
 
   // Здесь мы создаем отдельное состояние для каждой карточки, а глобальное состояние не подходить
   // Состояние - для каждой карточки
-  const [showModal, setShowModal] = useState(false);
+  const [activeModal, setActiveModal] = useState(false);
 
   // Состояние - для запрета прокрутки когда модалка открыта
   const [isLocked, setIsLocked] = useBodyScrollLock();
 
-  // Function - для showModal и isLocked
+  // Function - для activeModal и isLocked
   const handleClick = () => {
-    setShowModal(!showModal);
+    setActiveModal(!activeModal);
     setIsLocked(!isLocked);
   };
 
@@ -70,7 +70,7 @@ const Card = ({ item }) => {
           </div>
         </div>
       </div>
-      <ModalCard item={item} showModal={showModal} handleClick={handleClick} />
+      <ModalCard item={item} activeModal={activeModal} handleClick={handleClick} />
     </>
   );
 };

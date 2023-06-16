@@ -1,8 +1,8 @@
 import React from "react";
-import s from "./List.module.scss";
+import s from "./CardList.module.scss";
 import Card from "../../components/Card/Card";
 
-const List = ({readyСards}) => {
+const CardList = ({readyСards}) => {
   return (
     <>
       <div className={s.cards}>
@@ -18,4 +18,4 @@ const List = ({readyСards}) => {
   );
 };
 
-export default List;
+export default CardList;
