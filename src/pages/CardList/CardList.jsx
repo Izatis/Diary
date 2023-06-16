@@ -2,7 +2,7 @@ import React from "react";
 import s from "./CardList.module.scss";
 import Card from "../../components/Card/Card";
 
-const CardList = ({readyСards}) => {
+const CardList = ({ readyСards }) => {
   return (
     <>
       <div className={s.cards}>
