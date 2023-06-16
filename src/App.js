@@ -6,6 +6,7 @@ import CreateCard from "./pages/CreateCard/CreateCard";
 import { AddContext } from "./pages/AddContext/AddContext";
 import { createClient } from "pexels";
 import data from "./data/data";
+import CardList from "./pages/CardList/CardList";
 
 function App() {
   // Глобальные данные карточек
