@@ -81,7 +81,8 @@ const CreateCard = () => {
 
   // Функция - для отслеживание option
   const choiceOfOption = (e) => {
-    setOption(e.target.value), setCard({ ...card, mood: e.target.value });
+    setOption(e.target.value);
+    setCard({ ...card, mood: e.target.value });
   };
 
   // ====================================================================
